@@ -1,6 +1,8 @@
 package ie.gmit.dip;
 
 import java.io.*;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.*;
 
 public class basicFunctionality {
@@ -13,8 +15,8 @@ public class basicFunctionality {
     //if the word does exist ignore/
     //add key listener to swap words
     // add
-    private static final String googleWordFile = "C:\\Users\\Jorge\\Desktop\\gmit\\Text Simplifier API\\google-1000\\google-1000.txt";//ui ask the user for the file
-    private static final String thesaurusFile = "C:\\Users\\Jorge\\Desktop\\gmit\\Text Simplifier API\\MobyThesaurus2\\MobyThesaurus2.txt";
+    private static final String googleWordFile = "/Users/ortsevlised/IdeaProjects/textSimplifier/src/google-1000.txt";//ui ask the user for the file
+    private static final String thesaurusFile = "/Users/ortsevlised/IdeaProjects/textSimplifier/src/MobyThesaurus2.txt";
 
     //get line
     // split by comma
@@ -22,43 +24,38 @@ public class basicFunctionality {
 
 
     public static void main(String[] args) throws Exception {
+        Instant start = Instant.now();
         addGoogleWordsToMap();
         addMobyThesaurus();
-        System.out.println("akak");
+        Instant finish = Instant.now();
+        long timeElapsed = Duration.between(start, finish).toMillis();
+        System.out.println(timeElapsed);
+
     }
     public static void addGoogleWordsToMap() throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(googleWordFile))));
-        //String line;
-       // while ((line = br.readLine()) != null) {
-        for (String line = br.readLine(); line != null; line = br.readLine()) {
-            map.put(line, line);
-            set.add(line);
-        }
+        new BufferedReader(new InputStreamReader(new FileInputStream(new File(googleWordFile)))).lines()
+                .forEach(line -> {
+                    map.put(line, line);
+                    set.add(line);
+                });
     }
 
     public static void addMobyThesaurus() throws IOException {
-        BufferedReader brThesaurus = new BufferedReader(new InputStreamReader(new FileInputStream(new File(thesaurusFile))));
-        String line;
-        while ((line = brThesaurus.readLine()) != null) {
-            String[] words = line.split(",");
-            String googleWord = null;
+        new BufferedReader(new InputStreamReader(new FileInputStream(new File(thesaurusFile)))).lines()
+                .forEach(line -> {
+                    List<String> words = Arrays.asList((line).split(","));
+                    Optional<String> googleWord = words.stream().filter(word -> set.contains(word)).findFirst();
 
-            for (String word : words) {
-                if (set.contains(word)) {
-                    googleWord = word;
-                    break;
-                }
-            }
-            if (googleWord != null) {
-                addAll(words, googleWord);
-            }
-        }
+                    if (googleWord.isPresent()) {
+                        addAll(words, googleWord);
+                    }
+                });
     }
 
 
-    private static void addAll(String[] words, String googleWord) {
+    private static void addAll(List<String> words, Optional<String> googleWord) {
         for (String word : words) {
-            map.put(word, googleWord);
+            map.put(word, googleWord.get());
         }
     }
 
