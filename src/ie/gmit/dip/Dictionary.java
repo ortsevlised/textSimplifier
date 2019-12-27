@@ -1,6 +1,6 @@
 package ie.gmit.dip;
 
-public interface Parser {
+public interface Dictionary {
     void createDictionary();
     void addWordsToDictionary();
 }

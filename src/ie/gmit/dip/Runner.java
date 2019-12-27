@@ -1,7 +1,7 @@
 package ie.gmit.dip;
 
 public class Runner {
-
+    static GoogleWordConverter googleWordConverter = new GoogleWordConverter();
 	public static void main(String[] args) {
 		System.out.println(ConsoleColour.BLUE_BRIGHT);
 		System.out.println("***************************************************");
@@ -13,7 +13,7 @@ public class Runner {
 		System.out.println("***************************************************");
 		Paths.setPaths();
 		System.out.println("Enter Text to simplify or press ESC to exit>");
-		GoogleWordConverter.initialize();
+        googleWordConverter.initialize();
 		System.out.println(ConsoleColour.RESET);
 	}
 }

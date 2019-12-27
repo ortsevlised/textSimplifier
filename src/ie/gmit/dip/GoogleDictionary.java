@@ -3,7 +3,10 @@ package ie.gmit.dip;
 import java.io.*;
 import java.util.*;
 
-public class GoogleDictionary extends Paths implements Parser {
+import static ie.gmit.dip.Paths.getGooglePath;
+import static ie.gmit.dip.Paths.getMobyThesourusPath;
+
+public class GoogleDictionary implements Dictionary {
 
     private static Map<String, String> googleDictionary = new HashMap<>();
     private static Set<String> set = new HashSet<>();
@@ -18,7 +21,7 @@ public class GoogleDictionary extends Paths implements Parser {
     @Override
     public void createDictionary() {
         try {
-      new BufferedReader(new InputStreamReader(new FileInputStream(new File(Paths.getGooglePath())))).lines()
+      new BufferedReader(new InputStreamReader(new FileInputStream(new File(getGooglePath())))).lines()
                     .forEach(line -> {
                         googleDictionary.put(line, line);
                         set.add(line);
@@ -31,7 +34,7 @@ public class GoogleDictionary extends Paths implements Parser {
     @Override
     public void addWordsToDictionary() {
         try {
-            new BufferedReader(new InputStreamReader(new FileInputStream(new File(Paths.getMobyThesourusPath())))).lines()
+            new BufferedReader(new InputStreamReader(new FileInputStream(new File(getMobyThesourusPath())))).lines()
                     .forEach(line -> {
                         List<String> words = Arrays.asList((line).split(","));
                         Optional<String> googleWord = words.stream().filter(word -> set.contains(word)).findFirst();
