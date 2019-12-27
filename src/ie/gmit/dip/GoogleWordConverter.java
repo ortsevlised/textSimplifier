@@ -48,8 +48,8 @@ public class GoogleWordConverter implements NativeKeyListener {
         switch (e.getKeyCode()) {
             case NativeKeyEvent.VC_ESCAPE:
                 try {
+                    System.out.printf("%s%s", ConsoleColour.RESET, "Bye...");
                     unregisterNativeHook();
-                    System.out.println(ConsoleColour.RESET);
                 } catch (NativeHookException ex) {
                     ex.printStackTrace();
                 }

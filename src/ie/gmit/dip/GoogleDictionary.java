@@ -7,8 +7,8 @@ public class GoogleDictionary extends Paths implements Parser {
 
     private static Map<String, String> googleDictionary = new HashMap<>();
     private static Set<String> set = new HashSet<>();
-    private static final String googleWordFile = "/Users/ortsevlised/IdeaProjects/textSimplifier/src/ie/gmit/dip/resources/google-1000.txt";//ui ask the user for the file
-    private static final String thesaurusFile = "/Users/ortsevlised/IdeaProjects/textSimplifier/src/ie/gmit/dip/resources/MobyThesaurus2.txt";
+// /Users/ortsevlised/IdeaProjects/textSimplifier/src/ie/gmit/dip/google-1000.txt
+    // /Users/ortsevlised/IdeaProjects/textSimplifier/src/ie/gmit/dip/MobyThesaurus2.txt
 
 
     public static Map<String, String> getGoogleDictionary() {
@@ -18,7 +18,7 @@ public class GoogleDictionary extends Paths implements Parser {
     @Override
     public void createDictionary() {
         try {
-            new BufferedReader(new InputStreamReader(new FileInputStream(new File(googleWordFile)))).lines()
+      new BufferedReader(new InputStreamReader(new FileInputStream(new File(Paths.getGooglePath())))).lines()
                     .forEach(line -> {
                         googleDictionary.put(line, line);
                         set.add(line);
@@ -31,7 +31,7 @@ public class GoogleDictionary extends Paths implements Parser {
     @Override
     public void addWordsToDictionary() {
         try {
-            new BufferedReader(new InputStreamReader(new FileInputStream(new File(thesaurusFile)))).lines()
+            new BufferedReader(new InputStreamReader(new FileInputStream(new File(Paths.getMobyThesourusPath())))).lines()
                     .forEach(line -> {
                         List<String> words = Arrays.asList((line).split(","));
                         Optional<String> googleWord = words.stream().filter(word -> set.contains(word)).findFirst();
