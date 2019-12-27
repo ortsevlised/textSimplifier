@@ -11,13 +11,11 @@ public class Runner {
 		System.out.println("*       (AKA Orwellian Language Compliance)       *");		
 		System.out.println("*                                                 *");
 		System.out.println("***************************************************");
-		
+
+		//Paths.getPaths();
+
 		System.out.print("Enter Text>");
-		System.out.print(ConsoleColour.BLACK_BOLD_BRIGHT);
-		
-
-
-		
+		GoogleWordConverter.initialize();
 		System.out.println(ConsoleColour.RESET);
 	}
 }
