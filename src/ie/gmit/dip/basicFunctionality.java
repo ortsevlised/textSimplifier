@@ -1,15 +1,27 @@
 package ie.gmit.dip;
 
+import org.jnativehook.GlobalScreen;
+import org.jnativehook.NativeHookException;
+import org.jnativehook.keyboard.NativeKeyEvent;
+import org.jnativehook.keyboard.NativeKeyListener;
+
 import java.io.*;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class basicFunctionality {
+import static org.jnativehook.GlobalScreen.unregisterNativeHook;
+
+public class basicFunctionality implements NativeKeyListener {
 
     private static Map<String, String> map = new HashMap<>();
     private static Set<String> set = new HashSet<>();
+    private static StringBuilder word = new StringBuilder();
+    StringBuilder googlWord = new StringBuilder().append("\r");
 
+    private static final Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
 
     //mapp of the google 100 words to a thersarus map
     //if the word does exist ignore/
@@ -24,12 +36,15 @@ public class basicFunctionality {
 
 
     public static void main(String[] args) throws Exception {
+
+
         Instant start = Instant.now();
         addGoogleWordsToMap();
         addMobyThesaurus();
         Instant finish = Instant.now();
         long timeElapsed = Duration.between(start, finish).toMillis();
         System.out.println(timeElapsed);
+        createTextOut();
 
     }
     public static void addGoogleWordsToMap() throws IOException {
@@ -67,4 +82,51 @@ public class basicFunctionality {
         }
 
     }
+
+    public static void createTextOut() {
+        logger.setLevel(Level.OFF);
+
+        GlobalScreen.addNativeKeyListener(new basicFunctionality());
+        try {
+            GlobalScreen.registerNativeHook();
+        } catch (NativeHookException ex) {
+            System.err.println("There was a problem registering the native hook.");
+            System.err.println(ex.getMessage());
+
+            System.exit(1);
+        }
+        System.out.println("Enter username");
+
+    }
+
+
+    public void nativeKeyPressed(NativeKeyEvent e) {
+        // System.out.println("Key Pressed: " + NativeKeyEvent.getKeyText(e.getKeyCode()));
+
+        if (e.getKeyCode() == NativeKeyEvent.VC_ESCAPE) {
+            try {
+                unregisterNativeHook();
+            } catch (NativeHookException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    public void nativeKeyReleased(NativeKeyEvent e) {
+        if (e.getKeyCode() == NativeKeyEvent.VC_SPACE || e.getKeyCode() == NativeKeyEvent.VC_ENTER) {
+            System.out.print(googlWord.append(getGoogleEquivalent(word.toString().trim()) + " ").toString() + "\r");
+            word.setLength(0);
+        }
+        if (e.getKeyCode() == NativeKeyEvent.VC_BACKSPACE && googlWord.length() > 0) {
+            word.deleteCharAt(word.length() - 1);
+            googlWord.deleteCharAt(googlWord.append(word).length() - 1);
+            System.out.print(googlWord + "\r");
+            word.setLength(0);
+        }
+    }
+
+    public void nativeKeyTyped(NativeKeyEvent e) {
+            word.append(e.getKeyChar());
+        }
+
 }
