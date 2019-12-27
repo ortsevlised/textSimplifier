@@ -33,7 +33,6 @@ public class GoogleWordConverter implements NativeKeyListener {
             System.err.println(ex.getMessage());
             System.exit(1);
         }
-
     }
 
     private static String getGoogleEquivalent(String word) {
@@ -42,7 +41,6 @@ public class GoogleWordConverter implements NativeKeyListener {
         } else {
             return ConsoleColour.RED_BOLD + word;
         }
-
     }
 
     @Override
@@ -61,23 +59,10 @@ public class GoogleWordConverter implements NativeKeyListener {
                 word.setLength(0);
                 break;
             case NativeKeyEvent.VC_ENTER:
-                System.out.println(googleWord.append(getGoogleEquivalent(word.toString().trim().toLowerCase())).toString());
+                System.out.print(googleWord.append(getGoogleEquivalent(word.toString().trim().toLowerCase())).toString());
                 word.setLength(0);
                 googleWord.setLength(0);
                 googleWord.append("\r");
-                break;
-            case NativeKeyEvent.VC_BACKSPACE:
-                if (googleWord.length() > 0 && word.length() > 0) {
-                    word.deleteCharAt(word.length() - 1);
-                } else {
-                    if (googleWord.length() > 7) {
-                        // googleWord.setLength(googleWord.length() + word.length());
-                        googleWord.deleteCharAt(googleWord.append(word).length() - 1);
-                        if (googleWord.length() > 7) {
-                            System.out.print(googleWord);
-                        }
-                    }
-                }
                 break;
         }
     }
@@ -89,8 +74,11 @@ public class GoogleWordConverter implements NativeKeyListener {
 
     @Override
     public void nativeKeyTyped(NativeKeyEvent e) {
-        if (e.getKeyChar() != '\b') {
+        if (e.getKeyChar() == '\b' && word.length() > 0) {
+            word.deleteCharAt(word.length() - 1);
+        } else if (e.getKeyChar() != '\b') {
             word.append(e.getKeyChar());
         }
+
     }
 }
