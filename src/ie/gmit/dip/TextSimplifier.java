@@ -33,7 +33,6 @@ public class TextSimplifier implements NativeKeyListener {
      * Adds a listener to capture user input
      */
     public static void initialise() {
-        GoogleDictionaryImp googleDictionaryImp = new GoogleDictionaryImp();
         DictionarySources.setPathsFromUserInput();
         googleDictionaryImp.create(getGoogle1000Words());
         googleDictionaryImp.addWords(getMobyThesourusWords());

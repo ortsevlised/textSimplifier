@@ -21,7 +21,6 @@ public class DictionarySources {
     public static Stream<String> getMobyThesourusWords() {
         return mobyThesourusContent;
     }
-
     public static Stream<String> getGoogle1000Words() {
         return google1000Content;
     }
@@ -41,14 +40,14 @@ public class DictionarySources {
      * Converts the file into a stream
      *
      * @return a Stream of String
+     * or RuntimeException if there's no a valid path
      */
     private static Stream<String> getLines() {
         try {
             return new BufferedReader(new InputStreamReader(new FileInputStream(new File(checkIsNotEmpty(in))))).lines();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e.getMessage() + " Cannot continue without a valid path");
         }
-        return null;
     }
 
     /**

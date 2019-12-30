@@ -13,7 +13,7 @@ public class Runner {
 		System.out.println("***************************************************");
 		System.out.println("* GMIT - Dept. Computer Science & Applied Physics *");
 		System.out.println("*                                                 *");
-		System.out.println("*             Text Simplifier V0.0.1                *");
+		System.out.println("*             Text Simplifier V0.0.1              *");
 		System.out.println("*       (AKA Orwellian Language Compliance)       *");
 		System.out.println("*                                                 *");
 		System.out.println("***************************************************");

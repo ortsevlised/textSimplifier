@@ -18,7 +18,7 @@ public class GoogleDictionaryImp implements Dictionary {
      * Creates the base Dictionary
      * it's a 1to1 mapping relationship between key and values
      * Creates a set with the list of the map keys
-     *
+     * Big O = O(n)
      * @param lines each one of the lines of the dictionary source
      */
     public void create(Stream<String> lines) {
@@ -30,16 +30,13 @@ public class GoogleDictionaryImp implements Dictionary {
 
     /**
      * Adds values to the dictionary when one of the words in the line is on the set
-     *
+     * Big O = O(n)
      * @param lines each one of the lines to check and add in case of match
      */
     public void addWords(Stream<String> lines) {
-        lines.forEach(line -> {
-            List<String> words = Arrays.asList((line).split(","));
+        lines.map(line -> Arrays.asList(line.split(","))).forEach(words -> {
             Optional<String> googleWord = words.stream().filter(word -> set.contains(word)).findFirst();
-            if (googleWord.isPresent()) {
-                addAll(words, googleWord);
-            }
+            googleWord.ifPresent(s -> addAll(words, s));
         });
     }
 
@@ -61,12 +58,13 @@ public class GoogleDictionaryImp implements Dictionary {
 
     /**
      * Adds all the words passed to the google Dictionary
-      * @param words the List of Strings
+     * Big O = O(n)
+     * @param words the List of Strings
      * @param googleWord the google equivalent word
      */
-    private void addAll(List<String> words, Optional<String> googleWord) {
+    private void addAll(List<String> words, String googleWord) {
         for (String word : words) {
-            googleDictionary.put(word, googleWord.get());
+            googleDictionary.put(word, googleWord);
         }
     }
 }
