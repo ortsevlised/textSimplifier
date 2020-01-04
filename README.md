@@ -37,8 +37,8 @@ It works flawless on the IDE console. However, there might be some issues if ran
 
 ## Known issues:
 - When the google equivalent word is shorter than the word originally entered there might some residual text from the previous word. I imagine it is because the use of '/r' is not the same in every OS, On IntelliJ console works fine.
-- The words entered are submitted to the OS command line, and empty scanner to capture this input was implemented, but it will be properly fixed on next release, again in the IntelliJ console works fine.
-- Most versions of Windows don't support ANSI colors on the console so the app might not work there.
+- The words entered are redirected to the OS command line, an empty scanner to capture this input was implemented, but it will be properly fixed on next release, again in the IntelliJ console works fine.
+- Most versions of Windows don't support ANSI colors in their console so the app might not work there.
 
 ## To do:
 -  Add tests
