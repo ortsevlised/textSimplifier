@@ -15,7 +15,7 @@ import static org.jnativehook.GlobalScreen.unregisterNativeHook;
 /**
  * @author Jorge Desilvestro
  * @version 0.0.1
- * <p>
+ *
  * Represents the TextSimplifier
  * Initialises the Dictionary and adds a key listener to capture user's input
  */
@@ -36,7 +36,7 @@ public class TextSimplifier implements NativeKeyListener {
         DictionarySources.setPathsFromUserInput();
         googleDictionaryImp.create(getGoogle1000Words());
         googleDictionaryImp.addWords(getMobyThesourusWords());
-        addListener(new TextSimplifier());
+        startListening(new TextSimplifier());
     }
 
     /**
@@ -44,7 +44,7 @@ public class TextSimplifier implements NativeKeyListener {
      *
      * @param nativeKeyListener the NativeKeyListener object where the listener will be added
      */
-    private static void addListener(NativeKeyListener nativeKeyListener) {
+    private static void startListening(NativeKeyListener nativeKeyListener) {
         logger.setLevel(Level.OFF);
         GlobalScreen.addNativeKeyListener(nativeKeyListener);
         try {
@@ -74,20 +74,21 @@ public class TextSimplifier implements NativeKeyListener {
                 }
                 break;
             case NativeKeyEvent.VC_SPACE:
-                System.out.print(swappedWords.append(getWordFromDictionary()).append(" ").toString());
+                System.out.print(
+                        swappedWords.append(
+                                googleDictionaryImp.getWordEquivalent(word.toString()))
+                                .append(" ").toString());
                 word.setLength(0);
                 break;
             case NativeKeyEvent.VC_ENTER:
-                System.out.print(swappedWords.append(getWordFromDictionary()).toString());
+                System.out.print(
+                        swappedWords.append(
+                                googleDictionaryImp.getWordEquivalent(word.toString())).toString());
                 word.setLength(0);
                 swappedWords.setLength(0);
                 swappedWords.append("\r");
                 break;
         }
-    }
-
-    private String getWordFromDictionary() {
-        return googleDictionaryImp.getWordEquivalent(word.toString().trim().toLowerCase());
     }
 
     /**

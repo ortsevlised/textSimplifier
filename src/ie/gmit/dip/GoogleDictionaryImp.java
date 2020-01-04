@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 /**
  * @author Jorge Desilvestro
  * @version 0.0.1
- * <p>
+ *
  * Implements the Dictionary Interface to provide a GoogleDictionary
  */
 public class GoogleDictionaryImp implements Dictionary {
@@ -47,11 +47,12 @@ public class GoogleDictionaryImp implements Dictionary {
      * @return a StringBuilder with a colour and the equivalent google word
      */
     public String getWordEquivalent(String word) {
+        word = word.trim().toLowerCase();
         StringBuilder sb = new StringBuilder();
         if (googleDictionary.containsKey(word)) {
-            return sb.append(ConsoleColour.GREEN_BOLD).append(googleDictionary.get(word)).toString();
+            return sb.append(ConsoleColour.RED_BOLD).append(googleDictionary.get(word)).toString();
         } else {
-            return sb.append(ConsoleColour.RED_BOLD).append(word).toString();
+            return sb.append(ConsoleColour.BLACK_BOLD).append(word).toString();
         }
     }
 

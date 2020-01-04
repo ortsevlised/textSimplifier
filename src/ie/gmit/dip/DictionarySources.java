@@ -1,8 +1,8 @@
 package ie.gmit.dip;
 
-import java.io.*;
-import java.util.Scanner;
 import java.util.stream.Stream;
+
+import static ie.gmit.dip.TextUtils.getLines;
 
 /**
  * @author Jorge Desilvestro
@@ -14,7 +14,6 @@ import java.util.stream.Stream;
 
 
 public class DictionarySources {
-    private static final Scanner in = new Scanner(System.in);
     private static Stream<String> mobyThesourusContent;
     private static Stream<String> google1000Content;
 
@@ -26,7 +25,7 @@ public class DictionarySources {
     }
 
     /**
-     * Asks the user to enter the paths to the google 1000 and Moby thesaurus files
+     * Asks the user to enter the paths to the google 1000 words and Moby thesaurus files
      */
     public static void setPathsFromUserInput() {
         System.out.println("Enter Path to the Google 1000 words >");
@@ -36,32 +35,5 @@ public class DictionarySources {
         // /Users/ortsevlised/IdeaProjects/textSimplifier/src/ie/gmit/dip/MobyThesaurus2.txt
     }
 
-    /**
-     * Converts the file into a stream
-     *
-     * @return a Stream of String
-     * or RuntimeException if there's no a valid path
-     */
-    private static Stream<String> getLines() {
-        try {
-            return new BufferedReader(new InputStreamReader(new FileInputStream(new File(checkIsNotEmpty(in))))).lines();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e.getMessage() + " Cannot continue without a valid path");
-        }
-    }
 
-    /**
-     * Makes sure the input is not empty
-     *
-     * @param in a scanner
-     * @return a string to the path
-     */
-    private static String checkIsNotEmpty(Scanner in) {
-        String text = in.nextLine();
-        while (text.length() < 1) {
-            System.out.println("Path cannot be empty, please enter a valid path >>>");
-            text = in.nextLine();
-        }
-        return text;
-    }
 }
