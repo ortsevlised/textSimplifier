@@ -3,6 +3,7 @@ package ie.gmit.dip;
 /**
  * @author Jorge Desilvestro
  * @version 0.0.1
+ * @since 1.8
  *
  * Runner class for the Text Simplifier application
  */

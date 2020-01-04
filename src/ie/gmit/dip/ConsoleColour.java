@@ -1,5 +1,12 @@
 package ie.gmit.dip;
 
+/**
+ * @author Jorge Desilvestro
+ * @version 0.0.1
+ * <p>
+ *
+ * Colours for the console
+ */
 public enum ConsoleColour {
     RESET("\033[0m"),
     BLACK_BOLD("\033[1;30m"),

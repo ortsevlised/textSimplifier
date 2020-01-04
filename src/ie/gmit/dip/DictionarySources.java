@@ -7,6 +7,7 @@ import static ie.gmit.dip.TextUtils.getLines;
 /**
  * @author Jorge Desilvestro
  * @version 0.0.1
+ * @since 1.8
  *
  * Represents the Source files for the dictionary,
  * asks the user for input and generates Streams with the source content

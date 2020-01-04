@@ -15,6 +15,7 @@ import static org.jnativehook.GlobalScreen.unregisterNativeHook;
 /**
  * @author Jorge Desilvestro
  * @version 0.0.1
+ * @since 1.8
  *
  * Represents the TextSimplifier
  * Initialises the Dictionary and adds a key listener to capture user's input

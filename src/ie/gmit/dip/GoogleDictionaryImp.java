@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 /**
  * @author Jorge Desilvestro
  * @version 0.0.1
+ * @since 1.8
  *
  * Implements the Dictionary Interface to provide a GoogleDictionary
  */

@@ -8,7 +8,7 @@ public class TextUtils {
     /**
      * @author Jorge Desilvestro
      * @version 0.0.1
-     *
+     * @since 1.8
      *
      * Helper class for input handling
      */
