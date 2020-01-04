@@ -19,7 +19,6 @@ public class Runner {
 		System.out.println("*                                                 *");
 		System.out.println("***************************************************");
 		TextSimplifier.initialise();
-		System.out.println("Enter Text to simplify or press ESC to exit>");
 		System.out.println(ConsoleColour.RESET);
 	}
 

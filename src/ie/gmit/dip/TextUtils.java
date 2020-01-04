@@ -43,4 +43,21 @@ public class TextUtils {
         }
         return text;
     }
+
+    /**
+     * Acts as a wrapper for a known issue in the the listener library so it won't print to the users keys on background
+     *
+     */
+    public static void redirectCapturedInput() {
+        System.out.println("Enter Text to simplify or press ESC to exit>");
+        Scanner scanner = new Scanner(System.in);
+        String readString = scanner.next();
+        while (readString != null) {
+            if (scanner.hasNextLine()) {
+                readString = scanner.nextLine();
+            } else {
+                readString = null;
+            }
+        }
+    }
 }

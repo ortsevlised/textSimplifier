@@ -18,6 +18,7 @@ JNativeHook leverages platform-dependent native code through Java's native inter
 ```
 $ java -cp .:./simplifier.jar:jnativehook-2.1.0.jar ie.gmit.dip.Runner
 ```
+I assume that the list of 1000 Google words and the thesaurus is available in your local environment.
 <br/>
 
 ***
@@ -31,3 +32,13 @@ $ javac -cp .:jnativehook-2.1.0.jar  ie/gmit/dip/*.java
 ```
 $ java -cp .:jnativehook-2.1.0.jar  ie.gmit.dip.Runner
 ```
+The application was developed using IntelliJ IDEA 2019.1 on mac OS High Sierra Version 10.13.6
+It works flawless on the IDE console. However, there might be some issues if ran on others setups.
+
+## Known issues:
+- When the google equivalent word is shorter than the word originally entered there might some residual text from the previous word. I imagine it is because the use of '/r' is not the same in every OS, On IntelliJ console works fine.
+- The words entered are submitted to the OS command line, and empty scanner to capture this input was implemented, but it will be properly fixed on next release, again in the IntelliJ console works fine.
+- Most versions of Windows don't support ANSI colors on the console so the app might not work there.
+
+## To do:
+-  Add tests

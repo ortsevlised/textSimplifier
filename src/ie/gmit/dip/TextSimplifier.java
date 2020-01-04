@@ -8,9 +8,10 @@ import org.jnativehook.keyboard.NativeKeyListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static ie.gmit.dip.ConsoleColour.*;
+import static ie.gmit.dip.ConsoleColour.RESET;
 import static ie.gmit.dip.DictionarySources.getGoogle1000Words;
 import static ie.gmit.dip.DictionarySources.getMobyThesourusWords;
+import static ie.gmit.dip.TextUtils.redirectCapturedInput;
 import static org.jnativehook.GlobalScreen.unregisterNativeHook;
 
 /**
@@ -39,6 +40,7 @@ public class TextSimplifier implements NativeKeyListener {
         googleDictionaryImp.create(getGoogle1000Words());
         googleDictionaryImp.addWords(getMobyThesourusWords());
         startListening(new TextSimplifier());
+        redirectCapturedInput();
     }
 
     /**
@@ -48,7 +50,6 @@ public class TextSimplifier implements NativeKeyListener {
      */
     private static void startListening(NativeKeyListener nativeKeyListener) {
         logger.setLevel(Level.OFF);
-        GlobalScreen.addNativeKeyListener(nativeKeyListener);
         try {
             GlobalScreen.registerNativeHook();
         } catch (NativeHookException ex) {
@@ -56,6 +57,7 @@ public class TextSimplifier implements NativeKeyListener {
             System.err.println(ex.getMessage());
             System.exit(1);
         }
+        GlobalScreen.addNativeKeyListener(nativeKeyListener);
     }
 
     /**
@@ -69,10 +71,9 @@ public class TextSimplifier implements NativeKeyListener {
         switch (e.getKeyCode()) {
             case NativeKeyEvent.VC_ESCAPE:
                 try {
-                    System.out.print(CLEAR);
-                    System.out.printf("%n%s%s", RESET, "Bye...");
-                    System.out.flush();
+                    System.out.printf("%n%s%s%n", RESET, "Bye...");
                     unregisterNativeHook();
+                    System.exit(0);
                 } catch (NativeHookException ex) {
                     ex.printStackTrace();
                 }
@@ -106,7 +107,7 @@ public class TextSimplifier implements NativeKeyListener {
 
     /**
      * Defines what happens on Key Typed event
-     * Appends each key typed by the user other than backspace to an String builder
+     * Appends each key typed by the user other than backspace to a String builder
      * if the key typed is BACKSPACE it will remove the last appended char
      *
      * @param e the NativeKeyEvent
@@ -117,6 +118,5 @@ public class TextSimplifier implements NativeKeyListener {
         } else if (e.getKeyChar() != '\b') {
             word.append(e.getKeyChar());
         }
-
     }
 }
