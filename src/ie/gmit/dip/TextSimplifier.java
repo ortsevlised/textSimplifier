@@ -8,6 +8,7 @@ import org.jnativehook.keyboard.NativeKeyListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static ie.gmit.dip.ConsoleColour.*;
 import static ie.gmit.dip.DictionarySources.getGoogle1000Words;
 import static ie.gmit.dip.DictionarySources.getMobyThesourusWords;
 import static org.jnativehook.GlobalScreen.unregisterNativeHook;
@@ -68,7 +69,9 @@ public class TextSimplifier implements NativeKeyListener {
         switch (e.getKeyCode()) {
             case NativeKeyEvent.VC_ESCAPE:
                 try {
-                    System.out.printf("%n%s%s", ConsoleColour.RESET, "Bye...");
+                    System.out.print(CLEAR);
+                    System.out.printf("%n%s%s", RESET, "Bye...");
+                    System.out.flush();
                     unregisterNativeHook();
                 } catch (NativeHookException ex) {
                     ex.printStackTrace();
