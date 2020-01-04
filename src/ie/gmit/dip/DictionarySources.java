@@ -33,8 +33,5 @@ public class DictionarySources {
         google1000Content = getLines();
         System.out.println("Enter Path to the Moby Thesaurus >");
         mobyThesourusContent = getLines();
-        // /Users/ortsevlised/IdeaProjects/textSimplifier/src/ie/gmit/dip/MobyThesaurus2.txt
     }
-
-
 }

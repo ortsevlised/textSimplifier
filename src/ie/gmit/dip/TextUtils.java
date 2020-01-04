@@ -24,6 +24,7 @@ public class TextUtils {
         try {
             return new BufferedReader(new InputStreamReader(new FileInputStream(new File(checkIsNotEmpty(in))))).lines();
         } catch (FileNotFoundException e) {
+            System.out.printf("%n%s", ConsoleColour.RESET);
             throw new RuntimeException(e.getMessage() + " Cannot continue without a valid path");
         }
     }
