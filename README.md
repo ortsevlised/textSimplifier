@@ -13,24 +13,24 @@ JNativeHook leverages platform-dependent native code through Java's native inter
 
 ***
 
-## Run using the compiled jars from /textSimplifier path:
+## Run using the compiled jars from /src path:
 
 ```
-$ java -cp .:./simplifier.jar:jnativehook-2.1.0.jar ie.gmit.dip.Runner
+$ java -cp .:../simplifier.jar:../jnativehook-2.1.0.jar  ie.gmit.dip.Runner
 ```
 I assume that the list of 1000 Google words and the thesaurus is available in your local environment.
 <br/>
 
 ***
-## In case you get any error just run the following steps:
+## In case you get any error just run the following steps from the same path:
 *For Windows, ":" should be replaced with ";".*
 ## Compile
 ```
-$ javac -cp .:jnativehook-2.1.0.jar  ie/gmit/dip/*.java
+$ javac -cp ../jnativehook-2.1.0.jar ie/gmit/dip/*.java
 ```
 ## Run
 ```
-$ java -cp .:jnativehook-2.1.0.jar  ie.gmit.dip.Runner
+$ java -cp ../jnativehook-2.1.0.jar:  ie.gmit.dip.Runner
 ```
 The application was developed using IntelliJ IDEA 2019.1 on mac OS High Sierra Version 10.13.6
 It works flawless on the IDE console. However, there might be some issues if ran on others setups.
