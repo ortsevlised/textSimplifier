@@ -13,7 +13,7 @@ JNativeHook leverages platform-dependent native code through Java's native inter
 
 ***
 
-## Run using the compiled jars:
+## Run using the compiled jars from /src path:
 
 ```
 $ java -cp .:./simplifier.jar:jnativehook-2.1.0.jar ie.gmit.dip.Runner
